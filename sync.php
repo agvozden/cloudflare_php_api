@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * store your cloudflare data
+ */
 $token_key = 'YOUR_TOKEN_KEY_HERE';
 $email = 'YOUR_EMAIL';
 
