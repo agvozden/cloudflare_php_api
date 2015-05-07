@@ -8,8 +8,9 @@ echo 'start';
 include 'class_cloudflare.php';
 $cf = new cloudflare_api($email, $token_key);
 
+// for each zone set domain on left, zone file on right
 $zones = array(
-'domain.tld' => 'domain.tld.zone.txt',
+	'domain.tld' => 'domain.tld.zone.txt',
 );
 
 foreach ($zones as $zone => $zone_file){
@@ -20,9 +21,9 @@ foreach ($zones as $zone => $zone_file){
 
 	foreach ($isub_r as $row){
 		$sub_r[] = array(
-			'rec'=>$row->name, 
-			'ttl'=>$row->ttl_ceil, 
-			'type'=>$row->type, 
+			'rec'=>$row->name,
+			'ttl'=>$row->ttl_ceil,
+			'type'=>$row->type,
 			'value'=>$row->content,
 			'id'=>$row->rec_id
 		);
@@ -69,7 +70,7 @@ function check_record($rec, $ttl, $in, $type, $value)
 	// trim subdomain name
 	$rec = substr($rec, 0, -1);
 	if (substr($value, -1)=='.') $value = substr($value, 0, -1);
-	
+
 	echo " {$rec} {$ttl} {$in} {$type} {$value}; <br>";
 	$key = array_search($rec, array_column($sub_r, 'rec'));
 
@@ -81,7 +82,7 @@ function check_record($rec, $ttl, $in, $type, $value)
 			echo "update {$sub['value']}<br>";
 		} else
 		echo " {$sub['rec']} {$sub['ttl']} {$sub['type']} {$sub['value']}; <br>";
-		
+
 	} else {
 
 		$cf->rec_new($zone, $type, $rec, $value, $ttl=1, $mode=1, $prio=1, $service=1, $srvname=1, $protocol=1, $weight=1, $port=1, $target=1);
