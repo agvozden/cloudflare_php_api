@@ -10,6 +10,7 @@ None be deleted.
 
 Limits:
 > only full name in local zone (sumdomain,domain.tld)
+
 > only one per subdomain (no multi subdomains)
 
 update: multidomain support 
